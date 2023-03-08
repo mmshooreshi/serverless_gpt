@@ -14,13 +14,14 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY") 
 
 
-chat_language = os.getenv("INIT_LANGUAGE", default = "zh") #amend here to change your preset language
+chat_language = os.getenv("INIT_LANGUAGE", default = "fa") #amend here to change your preset language
 	
 MSG_LIST_LIMIT = int(os.getenv("MSG_LIST_LIMIT", default = 20))
 LANGUAGE_TABLE = {
 	  "zh": "哈囉！",
 	  "en": "Hello!",
-      "jp": "こんにちは"
+      "jp": "こんにちは",
+      "fa": "سلام!"
 	}
 
 
@@ -59,10 +60,10 @@ class ChatGPT:
 	            max_tokens=self.max_tokens
                 )
         
-        print("AI回答內容：")        
+        print("ربات")        
         print(response['choices'][0]['text'].strip())
 
-        print("AI原始回覆資料內容：")      
+        print("ربات : ")      
         print(response)
         
         return response['choices'][0]['text'].strip()
