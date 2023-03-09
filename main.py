@@ -54,6 +54,7 @@ class ChatGPT:
 
         response = openai.ChatCompletion.create(
 	            model="gpt-3.5-turbo-0301",
+                messages=self.msg_list,
 	            prompt=self.prompt.generate_prompt(),
 	            temperature=self.temperature,
 	            frequency_penalty=self.frequency_penalty,
