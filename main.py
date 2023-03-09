@@ -40,6 +40,9 @@ class Prompts:
         {"role": "user", "content": context},
         {"role": "assistant", "content": f"{LANGUAGE_TABLE[chat_language]}"}
         ]
+
+        self.messagesTk= [50,0]
+
         self.msg_list.append(f"AI:{LANGUAGE_TABLE[chat_language]}")
 	    
     def add_msg(self, new_msg):
@@ -53,9 +56,33 @@ class Prompts:
     def generate_prompt(self):
         return '\n'.join(self.msg_list)	
 	
-    def update_messages(self,role,content):
+    totalBefore=0
+    def update_messages(self,role,content, usage):
         self.messages.append({"role": role, "content": content})
+        addedTokens = usage['total_tokens']-totalBefore
+        self.messagesTk.append(addedTokens)
+        totalBefore= usage['total_tokens']
     
+    def shorten(self,prompt_tokens, completion_tokens, total_tokens):
+        excessive_tokens_count= total_tokens-4096
+        indice_to_remove=[]
+        for index, value in enumerate(self.messages):
+            if(excessive_tokens_count==0):
+                break
+            if(index ==0):
+                pass
+            else:
+                if(self.messagesTk[index]/excessive_tokens_count < 1.1):
+                    indice_to_remove.append(index)
+                    excessive_tokens_count -= self.messagesTk[index]
+                else:
+                    truncating_position = (self.messagesTk[index] / excessive_tokens_count)*1.3*len(self.messages[index]['content'])
+                    excessive_tokens_count = 0
+                    self.messages[index]['content'] = self.messages[index]['content'][truncating_position:]
+        if(len(indice_to_remove)):
+             for i, value in enumerate(indice_to_remove):
+                self.messages.pop(value)
+                self.messagesTk.pop(value)
 
 class ChatGPT:  
     def __init__(self):
@@ -68,15 +95,26 @@ class ChatGPT:
 	
     def get_response(self):
 
-        response = openai.ChatCompletion.create(
-	            model="gpt-3.5-turbo-0301",
-                messages=self.prompt.messages,
-	            temperature=self.temperature,
-	            frequency_penalty=self.frequency_penalty,
-	            presence_penalty=self.presence_penalty,
-	            max_tokens=self.max_tokens
-                )
-        self.prompt.update_messages("assistant",response['choices'][0]['message']['content'])
+        whileOverride=0
+        while(not whileOverride):
+            response = openai.ChatCompletion.create(
+	                model="gpt-3.5-turbo-0301",
+                    messages=self.prompt.messages,
+	                temperature=self.temperature,
+	                frequency_penalty=self.frequency_penalty,
+	                presence_penalty=self.presence_penalty,
+	                max_tokens=self.max_tokens
+                    )
+        
+            usage = response['usage']
+            content = response['choices'][0]['message']['content']
+
+            if(usage['total_tokens']>4090):
+                self.prompt.shorten(usage['prompt_tokens'],usage['completion_tokens'],usage['total_tokens'])
+            else:
+                whileOverride=1
+
+        self.prompt.update_messages("assistant",content,usage)
         
         # response = openai.Completion.create(
 	    #         model=self.model,
