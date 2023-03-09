@@ -68,7 +68,7 @@ class ChatGPT:
 	            presence_penalty=self.presence_penalty,
 	            max_tokens=self.max_tokens
                 )
-        self.update_messages("assistant",response['choices'][0]['text'].strip())
+        self.prompt.update_messages("assistant",response['choices'][0]['text'].strip())
         
         # response = openai.Completion.create(
 	    #         model=self.model,
