@@ -84,15 +84,8 @@ class ChatGPT:
 
         print("ربات : ")      
         print(response)
-        print("\n \n \n")
-        print("\n \n \n")
-        print("self: \n",self)
-        print("\n \n \n")
-        print("\n \n \n")
-        print("self.msg_list: \n \n",self.msg_list)
-        print("\n \n \n")
-        print("\n \n \n")
-        print("self.prompt.generate_prompt(): \n \n",self.prompt.generate_prompt())
+        
+        print("self.prompt.messages: \n \n",self.prompt.messages)
         
         return response['choices'][0]['text'].strip()
 	
