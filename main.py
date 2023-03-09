@@ -21,7 +21,7 @@ LANGUAGE_TABLE = {
 	  "zh": "哈囉！",
 	  "en": "Hello!",
       "jp": "こんにちは",
-      "fa": "سلام!"
+      "fa": "درود!"
 	}
 
 
@@ -52,8 +52,8 @@ class ChatGPT:
 	
     def get_response(self):
 
-        response = openai.Completion.create(
-	            model=self.model,
+        response = openai.ChatCompletion.create(
+	            model="gpt-3.5-turbo-0301",
 	            prompt=self.prompt.generate_prompt(),
 	            temperature=self.temperature,
 	            frequency_penalty=self.frequency_penalty,
@@ -61,11 +61,29 @@ class ChatGPT:
 	            max_tokens=self.max_tokens
                 )
         
+        # response = openai.Completion.create(
+	    #         model=self.model,
+	    #         prompt=self.prompt.generate_prompt(),
+	    #         temperature=self.temperature,
+	    #         frequency_penalty=self.frequency_penalty,
+	    #         presence_penalty=self.presence_penalty,
+	    #         max_tokens=self.max_tokens
+        #         )
+        
         print("ربات")        
         print(response['choices'][0]['text'].strip())
 
         print("ربات : ")      
         print(response)
+        print("\n \n \n")
+        print("\n \n \n")
+        print("self: \n",self)
+        print("\n \n \n")
+        print("\n \n \n")
+        print("self.msg_list: \n \n",self.msg_list)
+        print("\n \n \n")
+        print("\n \n \n")
+        print("self.prompt.generate_prompt(): \n \n",self.prompt.generate_prompt())
         
         return response['choices'][0]['text'].strip()
 	
