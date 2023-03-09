@@ -28,6 +28,10 @@ LANGUAGE_TABLE = {
 class Prompts:
     def __init__(self):
         self.msg_list = []        
+        self.messages =  [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "assistant", "content": f"{LANGUAGE_TABLE[chat_language]}"}
+        ]
         self.msg_list.append(f"AI:{LANGUAGE_TABLE[chat_language]}")
 	    
     def add_msg(self, new_msg):
@@ -41,8 +45,8 @@ class Prompts:
     def generate_prompt(self):
         return '\n'.join(self.msg_list)	
 	
-    def generate_messages(self):
-        return self.msg_list
+    def update_messages(self,role,content):
+        self.messages.append({"role": role, "content": content})
     
 
 class ChatGPT:  
@@ -58,13 +62,13 @@ class ChatGPT:
 
         response = openai.ChatCompletion.create(
 	            model="gpt-3.5-turbo-0301",
-                messages=self.prompt.msg_list,
-	            prompt=self.prompt.generate_prompt(),
+                messages=self.prompt.messages,
 	            temperature=self.temperature,
 	            frequency_penalty=self.frequency_penalty,
 	            presence_penalty=self.presence_penalty,
 	            max_tokens=self.max_tokens
                 )
+        self.update_messages("assistant",response['choices'][0]['text'].strip())
         
         # response = openai.Completion.create(
 	    #         model=self.model,
@@ -141,6 +145,8 @@ def reply_handler(bot, update):
     chatgpt = ChatGPT()        
     
     chatgpt.prompt.add_msg(update.message.text) #人類的問題 the question humans asked
+    chatgpt.prompt.update_messages("user",update.message.text)
+
     ai_reply_response = chatgpt.get_response() #ChatGPT產生的回答 the answers that ChatGPT gave
     
     update.message.reply_text(ai_reply_response) #用AI的文字回傳 reply the text that AI made
