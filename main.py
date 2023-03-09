@@ -41,6 +41,10 @@ class Prompts:
     def generate_prompt(self):
         return '\n'.join(self.msg_list)	
 	
+    def generate_messages(self):
+        return self.msg_list
+    
+
 class ChatGPT:  
     def __init__(self):
         self.prompt = Prompts()
@@ -54,7 +58,7 @@ class ChatGPT:
 
         response = openai.ChatCompletion.create(
 	            model="gpt-3.5-turbo-0301",
-                messages=self.msg_list,
+                messages=self.prompt.msg_list,
 	            prompt=self.prompt.generate_prompt(),
 	            temperature=self.temperature,
 	            frequency_penalty=self.frequency_penalty,
