@@ -68,7 +68,7 @@ class ChatGPT:
 	            presence_penalty=self.presence_penalty,
 	            max_tokens=self.max_tokens
                 )
-        self.prompt.update_messages("assistant",response['choices'][0]['text'].strip())
+        self.prompt.update_messages("assistant",response['choices'][0]['message']['content'])
         
         # response = openai.Completion.create(
 	    #         model=self.model,
@@ -80,14 +80,14 @@ class ChatGPT:
         #         )
         
         print("ربات")        
-        print(response['choices'][0]['text'].strip())
+        print(response['choices'][0]['message']['content'].strip())
 
         print("ربات : ")      
         print(response)
         
         print("self.prompt.messages: \n \n",self.prompt.messages)
         
-        return response['choices'][0]['text'].strip()
+        return response['choices'][0]['message']['content'].strip()
 	
     def add_msg(self, text):
         self.prompt.add_msg(text)
