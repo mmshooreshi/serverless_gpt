@@ -136,7 +136,7 @@ def reply_handler(bot, update):
     #text = update.message.text
     #update.message.reply_text(text)
     chatgpt = ChatGPT()        
-    
+    bot.send_chat_action(chat_id=update.message.chat_id, action=telegram.ChatAction.TYPING)
     chatgpt.prompt.add_msg(update.message.text) #人類的問題 the question humans asked
     chatgpt.prompt.update_messages("user",update.message.text)
 
