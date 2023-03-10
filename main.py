@@ -57,12 +57,15 @@ class Prompts:
         return '\n'.join(self.msg_list)	
 	
     totalBefore=0
-    def update_messages(self,role,content, usage):
+    def update_messages(self, role, content, usage=None):
         self.messages.append({"role": role, "content": content})
-        addedTokens = usage['total_tokens']-totalBefore
-        self.messagesTk.append(addedTokens)
-        totalBefore= usage['total_tokens']
-    
+        
+        if role == "assistant" and usage is not None:
+            addedTokens = usage['total_tokens'] - self.messagesTk[-1]
+            self.messagesTk.append(addedTokens)
+        else:
+            self.messagesTk.append(0)
+
     def shorten(self,prompt_tokens, completion_tokens, total_tokens):
         excessive_tokens_count= total_tokens-4096
         indice_to_remove=[]
