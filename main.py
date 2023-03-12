@@ -4,7 +4,7 @@ import logging
 
 import telegram, os
 from flask import Flask, request
-from telegram.ext import Dispatcher, MessageHandler, Filters
+from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
 
 
 
@@ -194,6 +194,19 @@ def reply_handler(bot, update):
     ai_reply_response = chatgpt.get_response() #ChatGPT產生的回答 the answers that ChatGPT gave
     
     update.message.reply_text(ai_reply_response) #用AI的文字回傳 reply the text that AI made
+def clear_handler(bot, update):
+    """Clear message."""
+    chatgpt.prompt.msg_list = []
+    chatgpt.prompt.messages =  [
+        {"role": "user", "content": context},
+        {"role": "assistant", "content": f"{LANGUAGE_TABLE[chat_language]}"}
+    ]
+
+    chatgpt.prompt.messagesTk = [50,0]
+    update.message.reply_text('cleared!')
+
+def start_handler(bot, update):
+    update.message.reply_text('Hello! I am Chat-GPT, a chatbot powered by OpenAI GPT-3. Input your query and I will answer it.')
 
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot,None)
@@ -201,6 +214,11 @@ dispatcher = Dispatcher(bot,None)
 # Add handler for handling message, there are many kinds of message. For this handler, it particular handle text
 # message.
 dispatcher.add_handler(MessageHandler(Filters.text, reply_handler))
+# Add handler for /clear command
+dispatcher.add_handler(CommandHandler('clear',clear_handler))
+
+# Add handler for /start command
+dispatcher.add_handler(CommandHandler('start',start_handler))
 
 if __name__ == "__main__":
     # Running server
