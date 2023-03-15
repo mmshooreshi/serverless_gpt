@@ -1,39 +1,55 @@
-# Project Name
+Sure, here's a structured hierarchy of the elements in the code:
 
-[Insert a catchy and intriguing statement that highlights the purpose and value of your project in one sentence.]
+- Import required libraries:
+    - logging: for logging messages
+    - telegram: for interacting with Telegram API
+    - os: for accessing environment variables
+    - Flask: for building web applications
+    - Dispatcher, MessageHandler, Filters, CommandHandler: for handling different types of messages and commands in Telegram bot
+    - openai: for accessing OpenAI's GPT-3 API
+    
+- Set global variables:
+    - MSG_LIST_LIMIT: for limiting the number of messages in the prompt list
+    - LANGUAGE_TABLE: a dictionary mapping language codes to greeting messages
+    - openai.api_key: authenticate with OpenAI's GPT-3 API using the API key stored in environment variables
+    - chat_language: the language used for the initial greeting message
+    
+- Define Prompts class:
+    - __init__: initialize the list of messages with the initial greeting message
+    - add_msg: add a new message to the list of messages and remove the oldest message if the list exceeds the limit
+    - remove_msg: remove the oldest message from the list of messages
+   - generate_prompt: concatenate all messages in the list of messages to form the prompt
+    - update_messages: add a new message to the list of messages and update the list of tokens used by each message (if the message is an AI response)
+    - shorten: remove messages from the list of messages to reduce the total number of tokens used (if the total exceeds the limit)
 
-## Table of Contents
+- Define ChatGPT class:
+    - __init__: initialize the Prompts object and set the parameters for generating responses using GPT-3 API (model, temperature, frequency penalty, presence penalty, max tokens)
+    - get_response: generate a response using GPT-3 API based on the current prompt
+    - add_msg: add a new message to the Prompts object
 
-1. [Getting Started](#getting-started)
-2. [Usage](#usage)
-3. [Features](#features)
-4. [Contributing](#contributing)
-5. [License](#license)
+- Get Telegram bot token from environment variables
 
-## Getting Started
+- Define Flask app
 
-[Describe what your project does and why it is useful. Provide instructions on how to download, install, and run the project on a local machine. Include screenshots, code snippets or videos if appropriate.]
+- Initialize Telegram bot using bot token
 
-## Usage
+- Define handlers for different types of messages and commands:
+    - reply_handler: generate a response using ChatGPT object and send the response to the user
+    - clear_handler: clear the list of messages in the Prompts object
+    - start_handler: send an initial
++____+_+_+_+_+_+_+____+
+greeting message to the user when they start the bot
 
-[Explain how to use the project from a user's perspective, including common use cases and examples of input/output.]
+- Create a dispatcher object to handle incoming messages and commands
 
-## Features
+- Add the message and command handlers to the dispatcher object
 
-[List the features and functionalities of your project, along with relevant code snippets, screenshots or demos.]
+- Start the Flask app to listen for incoming messages and commands
 
-## Contributing
+I hope this helps! Let me know if you have any questions or if there's anything else I can do for you.
 
-[Provide information on how to contribute to your project and what kind of contributions you welcome, such as bug reports, feature requests, documentation, code, or design.]
+_____________________
+task: write cool readme.md to be super engagement and attractive. bring the ideas and concepts newer than just this code shows. i have big ideas dude. help me please. this is universal node, make anyone able to just build a free end point, to start a secure dialogue flow running for any task and will uses github cron jobs as  one of main components inside its architecture. it has a moving window, knowledge graph, context efficiency, POWERFUL
 
-## License
 
-[Specify the license under which the project is available, in accordance with Open Source standards.]
-
-### 5 Killer Ways to Make Your README.md File Go Viral:
-
-1. Use vivid language to tell an intriguing story that inspires and engages readers
-2. Use eye-catching visuals, like GIFs, infographics, or videos, to convey complex ideas in an engaging way
-3. Highlight the most impressive and unique features of your project with bold text, catchy titles, and compelling descriptions
-4. Add social proof, like testimonials or awards, to showcase the value and impact of your project
-5. Leverage social media and online communities to share and promote your README.md file, by including call-to-actions, hashtags, and tagging relevant influencers and thought leaders in your field.
+TONE OF README. cool, geeky, nerdy (but not lame) + also bring emojis, weird unicodes, simple ascii combinations, structures, mermaid js in markdown, ...
