@@ -1,10 +1,4 @@
 
-# Universal Node
-
-![Node Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png)
-
-A universal node is a software platform built on the Node.js JavaScript runtime, designed to make it easy to create secure and efficient dialogue flows for any task. It utilizes GitHub cron jobs as one of its main components and features a moving window, knowledge graph, and context efficiency.
-
 ## Installation
 
 1. Clone the [serverless_gpt](https://github.com/mmshooreshi/serverless_gpt) repository on GitHub.
