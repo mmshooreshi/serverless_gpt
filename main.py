@@ -167,7 +167,7 @@ chatgpt = ChatGPT()
 
 @app.route('/callback', methods=['POST'])
 def webhook_handler():
-    """Set route /hook with POST method will trigger this method."""
+    # """Set route /hook with POST method will trigger this method."""
     if request.method == "POST":
         update = telegram.Update.de_json(request.get_json(force=True), bot)
 
@@ -192,9 +192,7 @@ def reply_handler(bot, update):
 
     # 用AI的文字回傳 reply the text that AI made
     update.message.reply_text(ai_reply_response)
-    update.message.reply_text(f"""CONTEXT: 
-                                   {chatgpt.prompt.msg_list}
-                              """)
+    update.message.reply_text(f"CONTEXT: {chatgpt.prompt.msg_list}")
 
 
 def clear_handler(bot, update):
