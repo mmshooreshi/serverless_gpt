@@ -48,7 +48,3 @@ greeting message to the user when they start the bot
 I hope this helps! Let me know if you have any questions or if there's anything else I can do for you.
 
 _____________________
-task: write cool readme.md to be super engagement and attractive. bring the ideas and concepts newer than just this code shows. i have big ideas dude. help me please. this is universal node, make anyone able to just build a free end point, to start a secure dialogue flow running for any task and will uses github cron jobs as  one of main components inside its architecture. it has a moving window, knowledge graph, context efficiency, POWERFUL
-
-
-TONE OF README. cool, geeky, nerdy (but not lame) + also bring emojis, weird unicodes, simple ascii combinations, structures, mermaid js in markdown, ...
