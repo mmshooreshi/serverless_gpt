@@ -37,48 +37,6 @@ Task 3 :a3, 2023-09-14, 7d
 Task 4 :a4, 2023-09-14, 7d
 Task 5 :a5, 2023-09-14, 7
 
-example 2
-gantt
-title 30-day IELTS Preparation Plan
-dateFormat YYYY-MM-DD
-section Reading
-Practice tests 1-5 :a1, 2023-03-01, 10d
-Focus on difficult areas :after a1 , 10d
-Practice tests 6-10 :after a2, 10d
-section Writing
-Practice tests 1-5 :a3, 2023-03-11, 10d
-Focus on difficult areas :after a3, 10d
-Practice tests 6-10 :after a4, 10d
-section Speaking
-Speaking practice 1-5 :a5, 2023-03-21, 10d
-Focus on difficult areas :after a5, 10d
-Speaking practice 6-10 :after a6, 10d
-section Listening
-Practice tests 1-5 :a7, 2023-03-31, 10d
-Focus on difficult areas :after a7, 10d
-Practice tests 6-10 :after a8, 10d
-
-example 3
-gantt
-title 30-day IELTS Preparation Plan
-dateFormat YYYY-MM-DD
-section Reading 
-Practice tests 1-5 :a1, 2023-03-01, 10d 
-Focus on difficult areas :after a1 , 10d 
-Practice tests 6-10 :after a2, 10d 
-section Writing 
-Practice tests 1-5 :a3, 2023-03-11, 10d 
-Focus on difficult areas :after a3, 10d 
-Practice tests 6-10 :after a4, 10d 
-section Speaking 
-Speaking practice 1-5 :a5, 2023-03-21, 10d 
-Focus on difficult areas :after a5, 10d 
-Speaking practice 6-10 :after a6, 10d 
-section Listening 
-Practice tests 1-5 :a7, 2023-03-31, 10d 
-Focus on difficult areas :after a7, 10d 
-Practice tests 6-10 :after a8, 10d
-
 + rule 1:  dont use ":" in the section names, as it gets errors.
 
 + rule 2:  make sure you use todays date as 2023/03/14. 
