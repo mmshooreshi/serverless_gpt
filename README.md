@@ -1,10 +1,47 @@
 
-# Serverless GPT
+# Universal Node
 
-Welcome to Serverless GPT, a powerful natural language processing (NLP) tool that uses OpenAI's GPT-3 API to generate AI-powered responses in any language. With its easy-to-use interface, you can quickly and easily set up a chatbot that can converse with your users in their preferred language.
+![Node Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png)
 
-Serverless GPT is powered by Vercel, GitHub, and Telegram, allowing you to quickly deploy a secure, cloud-based chatbot that can be accessed from anywhere. The chatbot is equipped with a moving window, which remembers conversation history and ensures context efficiency. It also has an integrated knowledge graph, which helps the chatbot better understand user queries and generate more accurate responses.
+A universal node is a software platform built on the Node.js JavaScript runtime, designed to make it easy to create secure and efficient dialogue flows for any task. It utilizes GitHub cron jobs as one of its main components and features a moving window, knowledge graph, and context efficiency.
 
-To get started, simply clone the repository from https://github.com/mmshooreshi/serverless_gpt, authenticate with GitHub on Vercel, and then add the repository as a new project. Once the project is set up, update the environment variables, including TELEGRAM_BOT_TOKEN and OPENAI_API_KEY, and use a VPN to set the webhook. Finally, test out your chatbot by sending messages and commands using Telegram.
+## Installation
 
-So what are you waiting for? Get started today and unleash the power of AI-powered chatbots!
+1. Clone the [serverless_gpt](https://github.com/mmshooreshi/serverless_gpt) repository on GitHub.
+2. Go to [Vercel](https://vercel.com/) and authenticate with GitHub.
+3. Go to the Dashboard page and click the "Overview" tab.
+4. Click the "Add new" button, then select "Project", and select "Import Git Repository" from the list.
+5. Select the cloned repository from the list.
+6. Go to the [Environment Variables](https://vercel.com/{your-username}/serverless-gpt/settings/environment-variables) page and fill in the following variables:
+
+```
+INIT_LANGUAGE = fa
+MSG_LIST_LIMIT = 20
+OPENAI_MODEL = text-davinci-003
+OPENAI_TEMPERATURE = 0.5
+OPENAI_FREQUENCY_PENALTY = 0
+OPENAI_PRESENCE_PENALTY = 0
+OPENAI_MAX_TOKENS = 250
+TELEGRAM_BOT_TOKEN = [bot token]
+OPENAI_API_KEY = [openai_api_key]
+```
+
+7. To get the bot token, go to [@BotFather](https://t.me/BotFather), send `/newbot`, and complete the instructions.
+
+8. Using a VPN:on, go to the following URL to enable the webhook:
+
+`https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/setWebhook?url=https://{your-app-name-on-vercel}.vercel.app/callback`
+
+## Usage
+
+Once the installation is completed, you can start using Universal Node to build secure and efficient dialogue flows for any task.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
