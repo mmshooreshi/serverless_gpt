@@ -1,5 +1,4 @@
-Sure, here's a structured hierarchy of the elements in the code:
-
+manual:
 - Import required libraries:
     - logging: for logging messages
     - telegram: for interacting with Telegram API
