@@ -22,13 +22,13 @@ OPENAI_API_KEY = [openai_api_key]
 
 7. To get the bot token, go to [@BotFather](https://t.me/BotFather), send `/newbot`, and complete the instructions.
 
-8. Using a VPN:on, go to the following URL to enable the webhook:
+8. Using a VPN (if you live in iran :D), go to the following URL to enable the webhook:
 
 `https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/setWebhook?url=https://{your-app-name-on-vercel}.vercel.app/callback`
 
 ## Usage
 
-Once the installation is completed, you can start using Universal Node to build secure and efficient dialogue flows for any task.
+Once the installation is completed, you can start using ServerlessGPT to build secure and efficient dialogue flows for any task.
 
 ## Contributing
 
