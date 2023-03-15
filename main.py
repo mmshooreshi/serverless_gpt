@@ -192,6 +192,9 @@ def reply_handler(bot, update):
 
     # 用AI的文字回傳 reply the text that AI made
     update.message.reply_text(ai_reply_response)
+    update.message.reply_text(f"""CONTEXT: 
+                                   {chatgpt.prompt.msg_list}
+                              """)
 
 
 def clear_handler(bot, update):
