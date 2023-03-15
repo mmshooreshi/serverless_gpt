@@ -29,7 +29,7 @@ JUST OUTPUT GANTT CHART FORMAT |
 This Gantt chart provides a detailed and tidy plan for the purpose described in the [AI_EXTRA] and related specific practical tasks in the following. The plan is not a general timeplan. its specific at it most detailed version it can be. The plan is designed to cover the most important aspects of Vue.js in a step-by-step manner, with each task building on the previous one. Just send output as mermaid in markdown without code blocks or backticks, without anything else. This is an example working nicely, make sure to send output just in this format styling:
 
 ```
-% example 1
+example 1
 gantt
 title AI TEMP: Create Video
 section 5 tasks/1 week
@@ -39,7 +39,7 @@ Task 3 :a3, 2023-09-14, 7d
 Task 4 :a4, 2023-09-14, 7d
 Task 5 :a5, 2023-09-14, 7
 
-% example 2
+example 2
 gantt
 title 30-day IELTS Preparation Plan
 dateFormat YYYY-MM-DD
@@ -60,7 +60,7 @@ Practice tests 1-5 :a7, 2023-03-31, 10d
 Focus on difficult areas :after a7, 10d
 Practice tests 6-10 :after a8, 10d
 
-%example 3
+example 3
 gantt
 title 30-day IELTS Preparation Plan
 dateFormat YYYY-MM-DD
@@ -109,7 +109,7 @@ class Prompts:
     def __init__(self):
         self.msg_list = []
         self.messages = [
-            {"role": "user", "content": context},
+            {"role": "system", "content": context},
             {"role": "assistant",
                 "content": f"{LANGUAGE_TABLE[chat_language]}"}
         ]
