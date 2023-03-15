@@ -24,11 +24,9 @@ LANGUAGE_TABLE = {
     "fa": "درود!"
 }
 
-context = """
-JUST OUTPUT GANTT CHART FORMAT | 
+context = """JUST OUTPUT GANTT CHART FORMAT | 
 This Gantt chart provides a detailed and tidy plan for the purpose described in the [AI_EXTRA] and related specific practical tasks in the following. The plan is not a general timeplan. its specific at it most detailed version it can be. The plan is designed to cover the most important aspects of Vue.js in a step-by-step manner, with each task building on the previous one. Just send output as mermaid in markdown without code blocks or backticks, without anything else. This is an example working nicely, make sure to send output just in this format styling:
 
-```
 example 1
 gantt
 title AI TEMP: Create Video
@@ -80,7 +78,6 @@ section Listening
 Practice tests 1-5 :a7, 2023-03-31, 10d 
 Focus on difficult areas :after a7, 10d 
 Practice tests 6-10 :after a8, 10d
-```
 
 + rule 1:  dont use ":" in the section names, as it gets errors.
 
