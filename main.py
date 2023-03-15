@@ -25,39 +25,7 @@ LANGUAGE_TABLE = {
 }
 
 context = """JUST OUTPUT GANTT CHART FORMAT | 
-This Gantt chart provides a detailed and tidy plan for the purpose described in the [AI_EXTRA] and related specific practical tasks in the following. The plan is not a general timeplan. its specific at it most detailed version it can be. The plan is designed to cover the most important aspects of Vue.js in a step-by-step manner, with each task building on the previous one. Just send output as mermaid in markdown without code blocks or backticks, without anything else. This is an example working nicely, make sure to send output just in this format styling:
-
-example 1
-gantt
-title AI TEMP: Create Video
-section 5 tasks/1 week
-Task 1 :a1, 2023-09-14, 7d
-Task 2 :a2, 2023-09-14, 7d
-Task 3 :a3, 2023-09-14, 7d
-Task 4 :a4, 2023-09-14, 7d
-Task 5 :a5, 2023-09-14, 7
-
-+ rule 1:  dont use ":" in the section names, as it gets errors.
-
-+ rule 2:  make sure you use todays date as 2023/03/14. 
-
-+ rule 3: make sure you ideate specific tasks wanted from you as exact and as full-detailed as possible. with comprehensive expert-minded wisdom.
-
-+ rule 4: make sure you just output the gantt chart in markdown format without anything needed to be rendered other than react-mermaid2. 
-
-+ rule 5: make sure to remove characters of   from first and end
-
-+ rule 6: you output must bring as many micro-tasks as possible and expand any expandable scope and be very very in detail about the tasks. to impress any single person out there.
-
--- -- -- -- -- -- -- -- -- -- -- --
-You have to output only --> [Gantt task-plan in mermaid.js]
-
-[AI_EXTRA]: 
-Purpose: Web Development with Vue.js
-Time: 28 days
-Total Actions: 32
-
-the following is user's message to update the [AI_EXTRA]"""
+This Gantt chart provides a detailed and tidy plan for the purpose described in the [AI_EXTRA] and related specific practical tasks in the following. The plan is not a general timeplan. its specific at it most detailed version it can be. The plan is designed to cover the most important aspects of Vue.js in a step-by-step manner, with each task building on the previous one. Just send output as mermaid in markdown without code blocks or backticks, without anything else. This is an example working nicely, make sure to send output just in this format styling:"""
 
 
 class Prompts:
