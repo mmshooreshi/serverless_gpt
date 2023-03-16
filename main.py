@@ -2,7 +2,7 @@ import logging, os
 import telegram
 from flask import Flask, request
 from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
-from openai import openai
+import openai
 from telegram import telegram
 from prompts import Prompts, context, LANGUAGE_TABLE
 from chatgpt import ChatGPT
