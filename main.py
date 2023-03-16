@@ -80,6 +80,8 @@ class Prompts:
                 self.messages.pop(value)
                 self.messagesTk.pop(value)
 
+        
+
 class ChatGPT:  
     def __init__(self):
         self.prompt = Prompts()
@@ -186,6 +188,9 @@ def reply_handler(bot, update):
     ai_reply_response = chatgpt.get_response() #ChatGPT產生的回答 the answers that ChatGPT gave
     
     update.message.reply_text(ai_reply_response) #用AI的文字回傳 reply the text that AI made
+    update.message.reply_text("chatgpt.prompt.messages:\n",chatgpt.prompt.messages) #用AI的文字回傳 reply the text that AI made
+    update.message.reply_text("chatgpt.prompt.messagesTk:\n",chatgpt.prompt.messagesTk) #用AI的文字回傳 reply the text that AI made
+    update.message.reply_text("chatgpt.prompt.msg_list:\n",chatgpt.prompt.msg_list) #用AI的文字回傳 reply the text that AI made
 
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot,None)
