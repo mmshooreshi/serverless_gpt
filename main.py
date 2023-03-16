@@ -195,7 +195,7 @@ def reply_handler(bot, update):
 
     ai_reply_response = chatgpt.get_response() 
     breakTxt="\n_____ \n _____\n"
-    update.message.reply_text(str(ai_reply_response + breakTxt+ str("\n ".join(chatgpt.prompt.messages))+breakTxt+ str("\n ".join(chatgpt.prompt.msg_list))+breakTxt+ str("\n ".join(chatgpt.prompt.messagesTk))))
+    update.message.reply_text(str(ai_reply_response + breakTxt+ str(chatgpt.prompt.messages)+breakTxt+ str(chatgpt.prompt.msg_list)+breakTxt+ str(chatgpt.prompt.messagesTk)))
     
 
 # New a dispatcher for bot
