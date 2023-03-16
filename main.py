@@ -4,10 +4,6 @@ import logging
 import telegram, os
 from flask import Flask, request
 from telegram.ext import Dispatcher, MessageHandler, Filters
-
-
-
-#################
 import openai
 	
 openai.api_key = os.getenv("OPENAI_API_KEY") 
@@ -179,9 +175,9 @@ def reply_handler(bot, update):
     ai_reply_response = chatgpt.get_response() 
     breakTxt="\n_____\n"
 
-    messages_str = ""
-    for msgS in chatgpt.prompt.messages:
-        messages_str += f"[{msgS['role']}]: {msgS['content']}\n"
+    messages_str = str(chatgpt.prompt.messages)
+    # for msgS in chatgpt.prompt.messages:
+        # messages_str += f"[{msgS['role']}]: {msgS['content']}\n"
 
     update.message.reply_text(str(ai_reply_response + '\n'+f"{10*'-----'}\n```msesages:```\n" + messages_str+ '\n'+f"{10*'-----'}\n```msg_list:```\n"+ str(chatgpt.prompt.msg_list)+ '\n'+f"{10*'-----'}\n```messagesTk:```\n"+ str(chatgpt.prompt.messagesTk)))
     
@@ -195,4 +191,4 @@ dispatcher.add_handler(MessageHandler(Filters.text, reply_handler))
 
 if __name__ == "__main__":
     # Running server
-    app.run(debug=True)
+    app.run()
