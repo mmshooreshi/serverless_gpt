@@ -137,6 +137,7 @@ def reply_handler(bot, update):
     ai_reply_response = chatgpt.get_response()
 
     update.message.reply_text(ai_reply_response)
+    update.message.reply_text(chatgpt.prompt.msg_list)
 
 def clear_handler(bot, update):
     """Clear message."""
