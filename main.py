@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 import logging
 
@@ -24,24 +23,24 @@ LANGUAGE_TABLE = {
       "fa": "درود!"
 	}
 from roles import roles
-mode='helpful_assistant'
-persian_rules=0
+mode="helpful_assistant"
+persian_rules=False
 
 context=roles[mode]+"\n\n"
 
 if(persian_rules):
-    context+=roles['persian_rules']
+    context=context + "\n"+ roles['persian_rules']
 
+print("context: ",context)
 
 class Prompts:
-    
     def __init__(self):
         self.msg_list = []        
         self.messages =  [
         {"role": "user", "content": context},
         {"role": "assistant", "content": f"{LANGUAGE_TABLE[chat_language]}"}
         ]
-
+        
         self.messagesTk= [50,0]
 
         self.msg_list.append(f"AI:{LANGUAGE_TABLE[chat_language]}")
@@ -92,6 +91,7 @@ class Prompts:
 
 class ChatGPT:  
     def __init__(self):
+
         self.prompt = Prompts()
         self.model = os.getenv("OPENAI_MODEL", default = "text-davinci-003")
         self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0.5))
@@ -101,7 +101,6 @@ class ChatGPT:
 	
     def get_response(self):
 
-        whileOverride=0
         response = openai.ChatCompletion.create(
 	          model="gpt-3.5-turbo-0301",
               messages=self.prompt.messages,
@@ -112,34 +111,7 @@ class ChatGPT:
               )
         usage = response['usage']
         content = response['choices'][0]['message']['content']
-        
-        while(0):
-            response = openai.ChatCompletion.create(
-	                model="gpt-3.5-turbo-0301",
-                    messages=self.prompt.messages,
-	                temperature=self.temperature,
-	                frequency_penalty=self.frequency_penalty,
-	                presence_penalty=self.presence_penalty,
-	                max_tokens=self.max_tokens
-                    )
-            usage = response['usage']
-            content = response['choices'][0]['message']['content']
-
-            if(usage['total_tokens']>4090):
-                self.prompt.shorten(usage['prompt_tokens'],usage['completion_tokens'],usage['total_tokens'])
-            else:
-                whileOverride=1
-
         self.prompt.update_messages("assistant",content,usage)
-        
-        # response = openai.Completion.create(
-	    #         model=self.model,
-	    #         prompt=self.prompt.generate_prompt(),
-	    #         temperature=self.temperature,
-	    #         frequency_penalty=self.frequency_penalty,
-	    #         presence_penalty=self.presence_penalty,
-	    #         max_tokens=self.max_tokens
-        #         )
         
         print("___________")        
         print(response['choices'][0]['message']['content'].strip())
@@ -161,13 +133,6 @@ class ChatGPT:
 	
     def add_msg(self, text):
         self.prompt.add_msg(text)
-
-
-
-
-
-
-#####################
 
 telegram_bot_token = str(os.getenv("TELEGRAM_BOT_TOKEN"))
 
