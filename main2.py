@@ -9,9 +9,9 @@ from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
 
 
 #################
-import openai
+import openai2
 	
-openai.api_key = os.getenv("OPENAI_API_KEY") 
+openai2.api_key = os.getenv("OPENAI_API_KEY") 
 
 
 chat_language = os.getenv("INIT_LANGUAGE", default = "fa") 
@@ -94,7 +94,7 @@ class ChatGPT:
 
         whileOverride=0
         while(not whileOverride):
-            response = openai.ChatCompletion.create(
+            response = openai2.ChatCompletion.create(
 	                model="gpt-3.5-turbo-0301",
                     messages=self.prompt.messages,
 	                temperature=self.temperature,
