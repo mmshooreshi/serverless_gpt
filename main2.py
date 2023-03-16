@@ -53,10 +53,10 @@ class Prompts:
     totalBefore=0
     def update_messages(self, role, content, usage=None):
         self.messages.append({"role": role, "content": content})
-        
         if role == "assistant" and usage is not None:
-            addedTokens = usage['total_tokens'] - self.messagesTk[-1]
+            addedTokens = usage['total_tokens']-totalBefore
             self.messagesTk.append(addedTokens)
+            totalBefore= usage['total_tokens']
         else:
             self.messagesTk.append(0)
 

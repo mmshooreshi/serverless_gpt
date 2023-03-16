@@ -15,8 +15,7 @@ LANGUAGE_TABLE = {
       "fa": "درود!"
 	}
 
-context = "you are helpful assistant"
-
+context = "JUST OUTPUT GANTT CHART FORMAT | This Gantt chart provides a detailed and tidy plan for the purpose described in the [following messages if any OR web development] and related specific practical tasks in the following. The plan is not a general timeplan. its specific at it most detailed version it can be. The plan is designed to cover the most important aspects of Vue.js in a step-by-step manner, with each task building on the previous one. Just send output as mermaid in markdown without code blocks or backticks, without anything else. This is an example working nicely, make sure to send output just in this format styling"
 class Prompts:
     def __init__(self):
         self.msg_list = []        
