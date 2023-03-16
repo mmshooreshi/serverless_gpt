@@ -123,13 +123,21 @@ class ChatGPT:
 	    #         max_tokens=self.max_tokens
         #         )
         
-        print("ربات")        
+        print("___________")        
         print(response['choices'][0]['message']['content'].strip())
+        print("___________")      
 
-        print("ربات : ")      
+        print("___________")        
         print(response)
+        print("___________")        
+
+        print("___________")        
+
         print("\n \n \n",f"{len(self.prompt.messages)}","\n \n \n")
+        print("___________")        
+        print("___________")        
         print("self.prompt.messages: \n \n \n",self.prompt.messages)
+        print("___________")        
         
         return response['choices'][0]['message']['content'].strip()
 	
@@ -187,7 +195,8 @@ def reply_handler(bot, update):
 
     ai_reply_response = chatgpt.get_response() 
     breakTxt="\n_____ \n _____\n"
-    update.message.reply_text(ai_reply_response + breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.messages))
+    update.message.reply_text(ai_reply_response + breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.msg_list)+breakTxt+ "\n ".join(chatgpt.prompt.messagesTk))
+    
 
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot,None)
