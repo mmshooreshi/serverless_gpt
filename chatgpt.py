@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+from openai2 import OpenAI
 from prompts import Prompts
 
 class ChatGPT:  
