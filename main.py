@@ -102,7 +102,18 @@ class ChatGPT:
     def get_response(self):
 
         whileOverride=0
-        while(not whileOverride):
+        response = openai.ChatCompletion.create(
+	          model="gpt-3.5-turbo-0301",
+              messages=self.prompt.messages,
+	          temperature=self.temperature,
+	          frequency_penalty=self.frequency_penalty,
+	          presence_penalty=self.presence_penalty,
+	          max_tokens=self.max_tokens
+              )
+        usage = response['usage']
+        content = response['choices'][0]['message']['content']
+        
+        while(0):
             response = openai.ChatCompletion.create(
 	                model="gpt-3.5-turbo-0301",
                     messages=self.prompt.messages,
@@ -111,11 +122,10 @@ class ChatGPT:
 	                presence_penalty=self.presence_penalty,
 	                max_tokens=self.max_tokens
                     )
-        
             usage = response['usage']
             content = response['choices'][0]['message']['content']
 
-            if(usage['total_tokens']>40090):
+            if(usage['total_tokens']>4090):
                 self.prompt.shorten(usage['prompt_tokens'],usage['completion_tokens'],usage['total_tokens'])
             else:
                 whileOverride=1
