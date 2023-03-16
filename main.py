@@ -24,9 +24,17 @@ LANGUAGE_TABLE = {
       "fa": "درود!"
 	}
 from roles import roles
-context=roles['helpful_assistant']+"\n\n"+roles['persian_rules']
+mode='helpful_assistant'
+persian_rules=0
+
+context=roles[mode]+"\n\n"
+
+if(persian_rules):
+    context+=roles['persian_rules']
+
 
 class Prompts:
+    
     def __init__(self):
         self.msg_list = []        
         self.messages =  [
