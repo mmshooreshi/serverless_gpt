@@ -7,7 +7,7 @@ from telegram.ext import Dispatcher, MessageHandler, Filters
 import openai
 	
 openai.api_key = os.getenv("OPENAI_API_KEY") 
-
+totalBefore=0
 
 chat_language = os.getenv("INIT_LANGUAGE", default = "fa") 
 	
@@ -23,11 +23,10 @@ mode="helpful_assistant"
 persian_rules=False
 
 context=roles[mode]+"\n\n"
-
+print(context)
 if(persian_rules):
     context=context + "\n"+ roles['persian_rules']
-
-print("context: ",context)
+print(context)
 
 class Prompts:
     def __init__(self):
@@ -52,12 +51,13 @@ class Prompts:
     def generate_prompt(self):
         return '\n'.join(self.msg_list)	
 	
-    totalBefore=0
-    def update_messages(self, role, content, usage=None):
+    
+    def update_messages(self, role, content, usage = None):
         self.messages.append({"role": role, "content": content})
         
         if role == "assistant" and usage!= None:
-            addedTokens = usage['total_tokens'] - self.messagesTk[len(self.messagesTk)-1]
+            addedTokens = usage['total_tokens'] - totalBefore
+            totalBefore = usage['total_tokens']  
             self.messagesTk.append(addedTokens)
         else:
             self.messagesTk.append(0)
