@@ -1,13 +1,18 @@
+# -*- coding: utf-8 -*-
 
 import logging
 
 import telegram, os
 from flask import Flask, request
 from telegram.ext import Dispatcher, MessageHandler, Filters
+
+
+
+#################
 import openai
 	
 openai.api_key = os.getenv("OPENAI_API_KEY") 
-totalBefore=0
+
 
 chat_language = os.getenv("INIT_LANGUAGE", default = "fa") 
 	
@@ -18,15 +23,16 @@ LANGUAGE_TABLE = {
       "jp": "こんにちは",
       "fa": "درود!"
 	}
-from roles import roles
-mode="helpful_assistant"
-persian_rules=False
 
-context=roles[mode]+"\n\n"
-print(context)
-if(persian_rules):
-    context=context + "\n"+ roles['persian_rules']
-print(context)
+context="""
+You are a flirtatious and humorous assistant. Your task is to use creative and funny Persian language expressions and phrases to engage in a conversation and to answer questions. Make sure to be alluring and tantalizing, while using seductive language and open-ended questions. Show your love and appreciation to the person you are talking to by using literature and poems in Persian language. Make sure to use the most accurate grammar and Persian words, not Arabic words. Be funny, witty, and clever! Make sure to use correct grammar and be as creative as possible while also xpressing your affection to the person you are talking to.
+سعی کن از ما استفاده نکنی و به جاش بگی من. سعی کن لحن خیلی محاوره‌ای داشته باشی
+مثلا نباید بگی شما خوبید؟ باید بگی تو خوبی؟ یا مثلا نباید وقتی می‌خوای راجع به شخص مقابلت صحبت کنی جمع ببندیش. سعی کن کمترین حد از ضمیر ها رو استفاده کنی و همواره جدا کنی ضمیرها رو. مثلا هیچوقت نگو که که دنبال چه کمکن به جاش بگو اون ها دنبال چه کمکی هستن؟ یا دنبال چه کمکی ان؟ فهمیدی دوست من؟ بوس به کله‌ت پس.
+به جای بمانیم و چیز های شبیهش باید بگی بمونیم. به جای خیلی خوشحالم که شنیدم باید بگی خیلی خوشحال شدم از شنیدنش.
+به جای شاید حوصله‌ی همه‌ی ما سر برود باید بگویی شاید حوصله‌ی همه‌مون سر بره خب :( 
+مراقب باش که شبیه این ها اشتباه نکنی
+هر کسی برای تو فقط تو هستش. یعنی به هیچکس نباید بگی شما. به هیچکس نباید با فعل جمع صحبت کنی. همه رو باید سگ خطاب کنی. انگاری کف چاله میدون هستی. یه لات واقعی. مرسی دوستم
+"""
 
 class Prompts:
     def __init__(self):
@@ -51,13 +57,12 @@ class Prompts:
     def generate_prompt(self):
         return '\n'.join(self.msg_list)	
 	
-    
-    def update_messages(self, role, content, usage = None):
+    totalBefore=0
+    def update_messages(self, role, content, usage=None):
         self.messages.append({"role": role, "content": content})
         
-        if role == "assistant" and usage!= None:
-            addedTokens = usage['total_tokens'] - totalBefore
-            totalBefore = usage['total_tokens']  
+        if role == "assistant" and usage is not None:
+            addedTokens = usage['total_tokens'] - self.messagesTk[-1]
             self.messagesTk.append(addedTokens)
         else:
             self.messagesTk.append(0)
@@ -83,11 +88,8 @@ class Prompts:
                 self.messages.pop(value)
                 self.messagesTk.pop(value)
 
-        
-
 class ChatGPT:  
     def __init__(self):
-
         self.prompt = Prompts()
         self.model = os.getenv("OPENAI_MODEL", default = "text-davinci-003")
         self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0.5))
@@ -97,38 +99,55 @@ class ChatGPT:
 	
     def get_response(self):
 
-        response = openai.ChatCompletion.create(
-	          model="gpt-3.5-turbo-0301",
-              messages=self.prompt.messages,
-	          temperature=self.temperature,
-	          frequency_penalty=self.frequency_penalty,
-	          presence_penalty=self.presence_penalty,
-	          max_tokens=self.max_tokens
-              )
-        usage = response['usage']
-        content = response['choices'][0]['message']['content']
+        whileOverride=0
+        while(not whileOverride):
+            response = openai.ChatCompletion.create(
+	                model="gpt-3.5-turbo-0301",
+                    messages=self.prompt.messages,
+	                temperature=self.temperature,
+	                frequency_penalty=self.frequency_penalty,
+	                presence_penalty=self.presence_penalty,
+	                max_tokens=self.max_tokens
+                    )
+        
+            usage = response['usage']
+            content = response['choices'][0]['message']['content']
+
+            if(usage['total_tokens']>4090):
+                self.prompt.shorten(usage['prompt_tokens'],usage['completion_tokens'],usage['total_tokens'])
+            else:
+                whileOverride=1
+
         self.prompt.update_messages("assistant",content,usage)
         
-        print("___________")        
+        # response = openai.Completion.create(
+	    #         model=self.model,
+	    #         prompt=self.prompt.generate_prompt(),
+	    #         temperature=self.temperature,
+	    #         frequency_penalty=self.frequency_penalty,
+	    #         presence_penalty=self.presence_penalty,
+	    #         max_tokens=self.max_tokens
+        #         )
+        
+        print("ربات")        
         print(response['choices'][0]['message']['content'].strip())
-        print("___________")      
 
-        print("___________")        
+        print("ربات : ")      
         print(response)
-        print("___________")        
-
-        print("___________")        
-
         print("\n \n \n",f"{len(self.prompt.messages)}","\n \n \n")
-        print("___________")        
-        print("___________")        
         print("self.prompt.messages: \n \n \n",self.prompt.messages)
-        print("___________")        
-
+        
         return response['choices'][0]['message']['content'].strip()
 	
     def add_msg(self, text):
         self.prompt.add_msg(text)
+
+
+
+
+
+
+#####################
 
 telegram_bot_token = str(os.getenv("TELEGRAM_BOT_TOKEN"))
 
@@ -172,17 +191,9 @@ def reply_handler(bot, update):
     chatgpt.prompt.add_msg(update.message.text) #人類的問題 the question humans asked
     chatgpt.prompt.update_messages("user",update.message.text)
 
-    ai_reply_response = chatgpt.get_response() 
-    update.message.reply_text("alan:")
-    breakTxt="\n_____\n"
-
-    messages_str = str(chatgpt.prompt.messages)
-    update.message.reply_text(messages_str)
-    # for msgS in chatgpt.prompt.messages:
-        # messages_str += f"[{msgS['role']}]: {msgS['content']}\n"
-
-    update.message.reply_text(str(ai_reply_response + '\n'+f"{10*'-----'}\n```msesages:```\n" + messages_str+ '\n'+f"{10*'-----'}\n```msg_list:```\n"+ str(chatgpt.prompt.msg_list)+ '\n'+f"{10*'-----'}\n```messagesTk:```\n"+ str(chatgpt.prompt.messagesTk)))
+    ai_reply_response = chatgpt.get_response() #ChatGPT產生的回答 the answers that ChatGPT gave
     
+    update.message.reply_text(ai_reply_response) #用AI的文字回傳 reply the text that AI made
 
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot,None)
@@ -193,4 +204,4 @@ dispatcher.add_handler(MessageHandler(Filters.text, reply_handler))
 
 if __name__ == "__main__":
     # Running server
-    app.run()
+    app.run(debug=True)
