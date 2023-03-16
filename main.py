@@ -115,7 +115,7 @@ class ChatGPT:
             usage = response['usage']
             content = response['choices'][0]['message']['content']
 
-            if(usage['total_tokens']>4090):
+            if(usage['total_tokens']>40090):
                 self.prompt.shorten(usage['prompt_tokens'],usage['completion_tokens'],usage['total_tokens'])
             else:
                 whileOverride=1
