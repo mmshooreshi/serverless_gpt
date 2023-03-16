@@ -185,12 +185,9 @@ def reply_handler(bot, update):
     chatgpt.prompt.add_msg(update.message.text) #人類的問題 the question humans asked
     chatgpt.prompt.update_messages("user",update.message.text)
 
-    ai_reply_response = chatgpt.get_response() #ChatGPT產生的回答 the answers that ChatGPT gave
-    
-    update.message.reply_text(ai_reply_response) #用AI的文字回傳 reply the text that AI made
-    update.message.reply_text("chatgpt.prompt.messages:\n",chatgpt.prompt.messages) #用AI的文字回傳 reply the text that AI made
-    update.message.reply_text("chatgpt.prompt.messagesTk:\n",chatgpt.prompt.messagesTk) #用AI的文字回傳 reply the text that AI made
-    update.message.reply_text("chatgpt.prompt.msg_list:\n",chatgpt.prompt.msg_list) #用AI的文字回傳 reply the text that AI made
+    ai_reply_response = chatgpt.get_response() 
+    breakTxt="\n_____ \n _____\n"
+    update.message.reply_text(ai_reply_response + breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.messages))
 
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot,None)
