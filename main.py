@@ -3,7 +3,7 @@ import telegram
 from flask import Flask, request
 from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
 import openai
-from telegram import telegram
+import telegram
 from prompts import Prompts, context, LANGUAGE_TABLE
 from chatgpt import ChatGPT
 	
