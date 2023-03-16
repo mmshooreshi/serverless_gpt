@@ -173,9 +173,11 @@ def reply_handler(bot, update):
     chatgpt.prompt.update_messages("user",update.message.text)
 
     ai_reply_response = chatgpt.get_response() 
+    update.message.reply_text("alan:")
     breakTxt="\n_____\n"
 
     messages_str = str(chatgpt.prompt.messages)
+    update.message.reply_text(messages_str)
     # for msgS in chatgpt.prompt.messages:
         # messages_str += f"[{msgS['role']}]: {msgS['content']}\n"
 
