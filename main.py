@@ -138,7 +138,7 @@ class ChatGPT:
         print("___________")        
         print("self.prompt.messages: \n \n \n",self.prompt.messages)
         print("___________")        
-        
+
         return response['choices'][0]['message']['content'].strip()
 	
     def add_msg(self, text):
@@ -195,7 +195,7 @@ def reply_handler(bot, update):
 
     ai_reply_response = chatgpt.get_response() 
     breakTxt="\n_____ \n _____\n"
-    update.message.reply_text(ai_reply_response + breakTxt+ "\n ".join(chatgpt.prompt.messages)+breakTxt+ "\n ".join(chatgpt.prompt.msg_list)+breakTxt+ "\n ".join(chatgpt.prompt.messagesTk))
+    update.message.reply_text(str(ai_reply_response + breakTxt+ str("\n ".join(chatgpt.prompt.messages))+breakTxt+ str("\n ".join(chatgpt.prompt.msg_list))+breakTxt+ str("\n ".join(chatgpt.prompt.messagesTk))))
     
 
 # New a dispatcher for bot
