@@ -1,10 +1,10 @@
-import logging
+import logging, os
 import telegram
 from flask import Flask, request
 from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
 from openai import openai
 from telegram import telegram
-from prompts import Prompts
+from prompts import Prompts, context, LANGUAGE_TABLE
 from chatgpt import ChatGPT
 	
 openai.api_key = os.getenv("OPENAI_API_KEY") 

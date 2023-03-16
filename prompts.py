@@ -1,6 +1,6 @@
 import os
 
-MSG_LIST_LIMIT = int(os.getenv("MSG_LIST_LIMIT", default = 20))
+MSG_LIST_LIMIT = int(os.getenv("MSG_LIST_LIMIT", default = 60))
 LANGUAGE_TABLE = {
 	  "zh": "哈囉！",
 	  "en": "Hello!",

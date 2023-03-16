@@ -1,12 +1,12 @@
-import os
+import os, openai
 
 class OpenAI:
     api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("OPENAI_MODEL", default = "text-davinci-003")
+    model = os.getenv("OPENAI_MODEL", default = "gpt-3.5-turbo-0301")
     temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0.5))
     frequency_penalty = float(os.getenv("OPENAI_FREQUENCY_PENALTY", default = 0))
     presence_penalty = float(os.getenv("OPENAI_PRESENCE_PENALTY", default = 0))
-    max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 250))
+    max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 500))
     
     def __init__(self, messages):
         self.messages = messages
