@@ -203,7 +203,7 @@ def reply_handler(bot, update):
 
     ai_reply_response = chatgpt.get_response() 
     breakTxt="\n_____\n"
-    update.message.reply_text(str(ai_reply_response + f"{breakTxt}msesages:{breakTxt}" + str(chatgpt.prompt.messages)+ f"{breakTxt}msg_list:{breakTxt}"+ str(chatgpt.prompt.msg_list)+ f"{breakTxt}messagesTk:{breakTxt}"+ str(chatgpt.prompt.messagesTk)))
+    update.message.reply_text(str(ai_reply_response + f"{5*'-----'}msesages:{breakTxt}" + str(chatgpt.prompt.messages)+ f"{5*'-----'}msg_list:{breakTxt}"+ str(chatgpt.prompt.msg_list)+ f"{5*'-----'}messagesTk:{breakTxt}"+ str(chatgpt.prompt.messagesTk)))
     
 
 # New a dispatcher for bot
