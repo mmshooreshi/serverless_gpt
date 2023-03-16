@@ -40,7 +40,7 @@ class Prompts:
         {"role": "user", "content": context},
         {"role": "assistant", "content": f"{LANGUAGE_TABLE[chat_language]}"}
         ]
-        
+
         self.messagesTk= [50,0]
 
         self.msg_list.append(f"AI:{LANGUAGE_TABLE[chat_language]}")
@@ -60,8 +60,8 @@ class Prompts:
     def update_messages(self, role, content, usage=None):
         self.messages.append({"role": role, "content": content})
         
-        if role == "assistant" and usage is not None:
-            addedTokens = usage['total_tokens'] - self.messagesTk[-1]
+        if role == "assistant" and usage!= None:
+            addedTokens = usage['total_tokens'] - self.messagesTk[len(self.messagesTk)-1]
             self.messagesTk.append(addedTokens)
         else:
             self.messagesTk.append(0)
